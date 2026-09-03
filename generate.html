@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>生成永久二维码 · 国旗护卫队纳新</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:#f2f6f4; color:#1a1a1a; min-height:100vh;
+    display:flex; flex-direction:column; align-items:center; padding:32px 16px;
+  }
+  h1 { font-size:20px; margin-bottom:8px; }
+  .desc { font-size:13px; color:#888; line-height:1.7; max-width:480px; text-align:center; margin-bottom:22px; }
+  .box { background:#fff; border-radius:16px; padding:24px 20px; width:100%; max-width:480px; box-shadow:0 8px 28px rgba(0,0,0,.07); }
+  label { font-size:13px; color:#666; display:block; margin-bottom:8px; }
+  input {
+    width:100%; padding:12px 14px; font-size:15px; border:1px solid #ddd; border-radius:10px;
+    outline:none; margin-bottom:14px;
+  }
+  input:focus { border-color:#07c160; }
+  button {
+    width:100%; background:#07c160; color:#fff; border:none; border-radius:999px;
+    font-size:16px; font-weight:600; padding:13px 0; cursor:pointer;
+  }
+  button:active { background:#06ad56; }
+  #out { margin-top:22px; text-align:center; display:none; }
+  #out img { width:260px; height:260px; border:1px solid #eee; border-radius:12px; background:#fff; }
+  #out .url { font-size:12px; color:#999; margin-top:10px; word-break:break-all; }
+  #dl {
+    display:inline-block; margin-top:16px; background:#fff; color:#07c160;
+    border:1px solid #07c160; border-radius:999px; padding:10px 26px;
+    font-size:14px; text-decoration:none;
+  }
+  .note { font-size:12px; color:#aaa; margin-top:18px; line-height:1.7; }
+</style>
+</head>
+<body>
+
+<h1>永久二维码生成器</h1>
+<p class="desc">
+  把本文件夹部署到网上（GitHub Pages / 云存储静态托管等）得到一个固定网址后，
+  将该网址填入下方，生成的二维码即为<b>永久码</b>——以后每周只更新群码图片，此码永不过期、无需重印。
+</p>
+
+<div class="box">
+  <label for="url">永久入口网址（部署后 index.html 的访问地址）</label>
+  <input id="url" type="url" placeholder="例如：https://yourname.github.io/guoqi2026/">
+  <button id="gen">生成永久二维码</button>
+
+  <div id="out">
+    <img id="qr" alt="永久二维码">
+    <div class="url" id="urlText"></div>
+    <a id="dl" download="国旗护卫队纳新-永久二维码.png">⬇ 下载高清二维码（1000×1000）</a>
+  </div>
+
+  <p class="note">
+    提示：下载失败时，可在二维码图片上右键「图片另存为」。<br>
+    生成的码内容是你自己的固定网址，不依赖任何第三方活码平台，长期稳定可控。
+  </p>
+</div>
+
+<script>
+document.getElementById('gen').addEventListener('click', function () {
+  var u = document.getElementById('url').value.trim();
+  if (!u) { alert('请先输入部署后的永久网址'); return; }
+  if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
+
+  var api = 'https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&margin=12&qzone=1&color=000000&bgcolor=ffffff&data='
+    + encodeURIComponent(u);
+
+  var out = document.getElementById('out');
+  out.style.display = 'block';
+  document.getElementById('qr').src = api;
+  document.getElementById('urlText').textContent = u;
+
+  var dl = document.getElementById('dl');
+  dl.href = api;
+  // 尝试转成 Blob 以支持跨域直接下载
+  fetch(api).then(function (r) { return r.blob(); }).then(function (b) {
+    dl.href = URL.createObjectURL(b);
+  }).catch(function () {});
+});
+</script>
+</body>
+</html>
