@@ -31,10 +31,10 @@ window.HUOMA_CONFIG = {
   qrImage: 'qrcode-current.png',
 
   /* 本页信息更新日期（YYYY-MM-DD，同时用于图片防缓存） */
-  updatedAt: '2026-09-03',
+  updatedAt: '2026-09-14',
 
   /* 该群码失效日期（仅用于页面提示，一般为更新日 +7 天） */
-  expireBefore: '2026-09-10',
+  expireBefore: '2026-09-21',
 
   /* 群负责人联系方式（选填，显示在页面底部，例如 '微信：zhangsan2026'） */
   contact: '',
