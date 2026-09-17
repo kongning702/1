@@ -22,7 +22,7 @@
 window.HUOMA_CONFIG = {
 
   /* 群名称（显示在页面顶部） */
-  groupName: '2026国旗护卫队纳新1群',
+  groupName: '2026国旗护卫队纳新2群',
 
   /* 最新群二维码对应的微信邀请链接（选填，不会解码可留着旧链接） */
   inviteUrl: 'https://weixin.qq.com/g/AwYAAPLnsn6RC9rHhRpI1lMRSKfnhRHEC3nmGowL_A_EzL5DyJwnvzeyPEqw__0F',
@@ -31,10 +31,10 @@ window.HUOMA_CONFIG = {
   qrImage: 'qrcode-current.png',
 
   /* 本页信息更新日期（YYYY-MM-DD，同时用于图片防缓存） */
-  updatedAt: '2026-09-14',
+  updatedAt: '2026-09-17',
 
   /* 该群码失效日期（仅用于页面提示，一般为更新日 +7 天） */
-  expireBefore: '2026-09-21',
+  expireBefore: '2026-09-24',
 
   /* 群负责人联系方式（选填，显示在页面底部，例如 '微信：zhangsan2026'） */
   contact: '',
